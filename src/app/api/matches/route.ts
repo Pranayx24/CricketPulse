@@ -13,7 +13,7 @@ export async function GET() {
 
     const json = await res.json();
 
-    const matches = json.data.map((match: any) => ({
+    const matches = (json.data || []).map((match: any) => ({
       id: match.id,
 
       team1: {
