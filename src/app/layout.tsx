@@ -24,4 +24,8 @@ export default function RootLayout({
       </body>
     </html>
   )
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> bf47086 (Fix layout template string)
