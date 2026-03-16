@@ -10,7 +10,7 @@ export default function MatchPage({ params }: any) {
 
   const fetchMatch = () => {
 
-    fetch(`https://api.cricapi.com/v1/match_info?apikey=${API_KEY}&id=${params.id}`)
+    fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${API_KEY}&id=${params.id}`)
     .then(res=>res.json())
     .then(data=>{
       setMatch(data.data)
@@ -23,10 +23,8 @@ export default function MatchPage({ params }: any) {
     fetchMatch()
 
     const interval = setInterval(()=>{
-
       fetchMatch()
-
-    },10000)   // refresh every 10 seconds
+    },10000)
 
     return ()=>clearInterval(interval)
 
@@ -57,18 +55,16 @@ export default function MatchPage({ params }: any) {
       }}
       >
 
-        <h1 style={{fontSize:"30px"}}>
-          {match.name}
-        </h1>
+        <h1>{match.name}</h1>
 
-        <p style={{color:"#00ff88",fontSize:"18px"}}>
+        <p style={{color:"#00ff88"}}>
           {match.status}
         </p>
 
       </div>
 
 
-      {/* TEAMS */}
+      {/* LIVE SCORES */}
 
       <div
       style={{
@@ -79,7 +75,7 @@ export default function MatchPage({ params }: any) {
       }}
       >
 
-      {match.teamInfo?.map((team:any,index:number)=>(
+      {match.score?.map((team:any,index:number)=>(
 
         <div
         key={index}
@@ -90,7 +86,15 @@ export default function MatchPage({ params }: any) {
         }}
         >
 
-        <h2>{team.name}</h2>
+        <h2>{team.inning}</h2>
+
+        <h3>
+          {team.r}/{team.w}
+        </h3>
+
+        <p>
+          Overs: {team.o}
+        </p>
 
         </div>
 
@@ -109,7 +113,7 @@ export default function MatchPage({ params }: any) {
       }}
       >
 
-      <h2 style={{marginBottom:"15px"}}>Match Information</h2>
+      <h2>Match Information</h2>
 
       <p><b>Match Type:</b> {match.matchType}</p>
       <p><b>Venue:</b> {match.venue}</p>
