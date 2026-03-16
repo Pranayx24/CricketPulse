@@ -2,12 +2,17 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Force full black theme everywhere */
 
-:root {
-  --background: #000000;
-  --foreground: #ffffff;
+/* Force full black theme everywhere */
+=======
+/* FORCE FULL BLACK THEME */
+>>>>>>> 38e026c (force black theme)
+
+html, body {
+  background: #000000 !important;
+  color: #ffffff !important;
 }
+
 
 html,
 body {
@@ -51,3 +56,37 @@ section {
 a {
   color: #ffffff;
 }
+=======
+/* All sections black */
+
+header,
+nav,
+main,
+section,
+footer,
+div {
+  background-color: #000000 !important;
+}
+
+/* Cards */
+
+.card-stadium {
+  background: #000000 !important;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 18px rgba(255,0,0,0.7);
+  border-radius: 12px;
+}
+
+/* Links */
+
+a {
+  color: #ffffff;
+}
+
+/* Footer */
+
+footer {
+  background: #000000 !important;
+  border-top: 1px solid #111;
+}
+
