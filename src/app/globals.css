@@ -2,42 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FORCE FULL BLACK THEME */
-
 html, body {
-  background: #000000 !important;
-  color: #ffffff !important;
-}
-
-/* All sections black */
-
-header,
-nav,
-main,
-section,
-footer,
-div {
-  background-color: #000000 !important;
-}
-
-/* Cards */
-
-.card-stadium {
-  background: #000000 !important;
-  border: 2px solid #ff0000;
-  box-shadow: 0 0 18px rgba(255,0,0,0.7);
-  border-radius: 12px;
-}
-
-/* Links */
-
-a {
+  background: #000000;
   color: #ffffff;
 }
 
-/* Footer */
-
-footer {
-  background: #000000 !important;
-  border-top: 1px solid #111;
+.card-stadium {
+  background: #000000;
+  border: 2px solid red;
+  box-shadow: 0 0 15px rgba(255,0,0,0.7);
 }
