@@ -8,7 +8,7 @@ export default function MatchPage({ params }: any) {
 
   const [match,setMatch] = useState<any>(null)
 
-  useEffect(()=>{
+  const fetchMatch = () => {
 
     fetch(`https://api.cricapi.com/v1/match_info?apikey=${API_KEY}&id=${params.id}`)
     .then(res=>res.json())
@@ -16,7 +16,22 @@ export default function MatchPage({ params }: any) {
       setMatch(data.data)
     })
 
+  }
+
+  useEffect(()=>{
+
+    fetchMatch()
+
+    const interval = setInterval(()=>{
+
+      fetchMatch()
+
+    },10000)   // refresh every 10 seconds
+
+    return ()=>clearInterval(interval)
+
   },[])
+
 
   if(!match){
     return(
@@ -53,7 +68,7 @@ export default function MatchPage({ params }: any) {
       </div>
 
 
-      {/* TEAMS SECTION */}
+      {/* TEAMS */}
 
       <div
       style={{
