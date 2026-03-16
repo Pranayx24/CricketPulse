@@ -2,63 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
-/* FULL BLACK THEME */
+/* FORCE FULL BLACK THEME */
 
-:root {
-  --background: #000000;
-  --foreground: #ffffff;
+html, body {
+  background: #000000 !important;
+  color: #ffffff !important;
 }
 
-/* Make entire site black */
-html,
-body {
-  background-color: #000000;
-  color: #ffffff;
-  min-height: 100vh;
-}
+/* All sections black */
 
-/* Remove any grey backgrounds */
-* {
-  background-color: transparent;
+header,
+nav,
+main,
+section,
+footer,
+div {
+  background-color: #000000 !important;
 }
 
 /* Cards */
+
 .card-stadium {
-  background: #000000;
+  background: #000000 !important;
   border: 2px solid #ff0000;
-  box-shadow: 0 0 18px rgba(255, 0, 0, 0.7);
+  box-shadow: 0 0 18px rgba(255,0,0,0.7);
   border-radius: 12px;
-  transition: 0.3s ease;
 }
 
-.card-stadium:hover {
-  box-shadow: 0 0 25px rgba(255, 0, 0, 0.9);
+/* Links */
+
+a {
+  color: #ffffff;
 }
 
-/* Navbar or sections */
-header,
-nav,
-section,
-main,
+/* Footer */
+
 footer {
-  background: #000000;
-}
-
-/* Scrollbar */
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #000000;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #330000;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #660000;
+  background: #000000 !important;
+  border-top: 1px solid #111;
 }
