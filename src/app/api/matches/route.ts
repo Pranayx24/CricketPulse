@@ -1,54 +1,43 @@
 import { NextResponse } from 'next/server';
 
-// Mock data generator for matches to simulate free API without rate limits
-const generateMockMatches = () => {
-  return [
-    {
-      id: 'm1',
-      team1: { name: 'India', shortName: 'IND', logo: '🇮🇳', score: '210/4', overs: '20.0' },
-      team2: { name: 'Australia', shortName: 'AUS', logo: '🇦🇺', score: '205/6', overs: '20.0' },
-      status: 'FINISHED',
-      matchType: 'T20',
-      series: 'IND vs AUS T20 Series',
-      date: new Date().toISOString(),
-      result: 'India won by 5 runs'
-    },
-    {
-      id: 'm2',
-      team1: { name: 'England', shortName: 'ENG', logo: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', score: '145/2', overs: '15.4' },
-      team2: { name: 'South Africa', shortName: 'RSA', logo: '🇿🇦', score: '220/8', overs: '20.0' },
-      status: 'LIVE',
-      matchType: 'T20',
-      series: 'World Cup 2026',
-      date: new Date().toISOString(),
-      result: 'ENG need 76 runs in 26 balls'
-    },
-    {
-      id: 'm3',
-      team1: { name: 'Pakistan', shortName: 'PAK', logo: '🇵🇰', score: '', overs: '' },
-      team2: { name: 'New Zealand', shortName: 'NZ', logo: '🇳🇿', score: '', overs: '' },
-      status: 'UPCOMING',
-      matchType: 'ODI',
-      series: 'PAK vs NZ ODI Series',
-      date: new Date(Date.now() + 86400000).toISOString(),
-      result: 'Match starts tomorrow'
-    }
-  ];
-};
-
 export async function GET() {
   try {
-    // In a real scenario, you would fetch from CricAPI or CricketData here
-    // Example: const res = await fetch(`https://api.cricapi.com/v1/currentMatches?apikey=${process.env.CRIC_API_KEY}`);
-    
-    // Using mock data to ensure the free requirement is met continuously
-    const matches = generateMockMatches();
-    
-    // Simulate slight network delay for realism
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
+
+    const res = await fetch(
+      `https://api.cricapi.com/v1/currentMatches?apikey=${process.env.CRIC_API_KEY}`
+    );
+
+    const data = await res.json();
+
+    const matches = data.data?.map((match: any) => ({
+      id: match.id,
+      team1: {
+        name: match.teams?.[0] || "Team 1",
+        shortName: match.teams?.[0]?.slice(0,3).toUpperCase() || "T1",
+        logo: "🏏",
+        score: match.score?.[0]?.r ? `${match.score[0].r}/${match.score[0].w}` : "",
+        overs: match.score?.[0]?.o ? `${match.score[0].o}` : ""
+      },
+      team2: {
+        name: match.teams?.[1] || "Team 2",
+        shortName: match.teams?.[1]?.slice(0,3).toUpperCase() || "T2",
+        logo: "🏏",
+        score: match.score?.[1]?.r ? `${match.score[1].r}/${match.score[1].w}` : "",
+        overs: match.score?.[1]?.o ? `${match.score[1].o}` : ""
+      },
+      status: match.status || "LIVE",
+      matchType: match.matchType || "T20",
+      series: match.series || "International Match",
+      date: match.date || new Date().toISOString(),
+      result: match.status || "Match in progress"
+    })) || [];
+
     return NextResponse.json({ success: true, data: matches });
+
   } catch (error) {
-    return NextResponse.json({ success: false, error: 'Failed to fetch matches' }, { status: 500 });
+    return NextResponse.json(
+      { success: false, error: 'Failed to fetch matches' },
+      { status: 500 }
+    );
   }
 }
