@@ -3,17 +3,13 @@ import { NextResponse } from "next/server";
 export async function GET() {
   try {
 
-<<<<<<< HEAD
-  const res = await fetch(
-=======
     const res = await fetch(
->>>>>>> 28729f3 (Connected CricAPI live matches)
       "https://api.cricapi.com/v1/currentMatches?apikey=2bb0be13-6bdd-421f-9786-41f590656393"
     );
 
     const json = await res.json();
 
-    const matches = (json.data || []).map((match: any) => ({
+    const matches = json.data.map((match: any) => ({
       id: match.id,
 
       team1: {
