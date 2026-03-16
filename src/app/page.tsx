@@ -10,14 +10,24 @@ export default function Home() {
   const [matches,setMatches] = useState<any[]>([])
   const [loading,setLoading] = useState(true)
 
-  const fetchMatches = () => {
+  const fetchMatches = async () => {
 
-    fetch(`https://api.cricapi.com/v1/matches?apikey=${API_KEY}&offset=0`)
-    .then(res=>res.json())
-    .then(data=>{
+    try{
+
+      const res = await fetch(
+        `https://api.cricapi.com/v1/matches?apikey=${API_KEY}&offset=0`
+      )
+
+      const data = await res.json()
+
       setMatches(data.data || [])
       setLoading(false)
-    })
+
+    }catch(err){
+
+      console.log("API error")
+
+    }
 
   }
 
@@ -25,9 +35,12 @@ export default function Home() {
 
     fetchMatches()
 
+    // refresh every 60 seconds instead of 10 seconds
     const interval = setInterval(()=>{
+
       fetchMatches()
-    },20000)
+
+    },60000)
 
     return ()=>clearInterval(interval)
 
