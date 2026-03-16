@@ -19,15 +19,15 @@ export async function GET() {
 
     const data = await res.json()
 
-    return NextResponse.json(data)
+    return NextResponse.json({
+      data: data?.data || data?.matches || []
+    })
 
   } catch (error) {
 
-    console.error("API ERROR:", error)
-
     return NextResponse.json({
-      status: "error",
-      message: "Failed to fetch matches"
+      data: [],
+      error: "Failed to fetch matches"
     })
 
   }
