@@ -4,97 +4,81 @@ import { useEffect, useState } from "react"
 
 export default function Home() {
 
-  const [matches, setMatches] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const API_KEY = "2bb0be13-6bdd-421f-9786-41f590656393"
 
-  const fetchMatches = async () => {
-    try {
-
-      const res = await fetch(
-        "https://api.cricapi.com/v1/currentMatches?apikey=2bb0be13-6bdd-421f-9786-41f590656393&offset=0"
-      )
-
-      const data = await res.json()
-
-      if (data && data.data) {
-        setMatches(data.data)
-      }
-
-      setLoading(false)
-
-    } catch (error) {
-      console.log("API Error:", error)
-    }
-  }
+  const [matches, setMatches] = useState([])
+  const [tab, setTab] = useState("live")
 
   useEffect(() => {
-
-    fetchMatches()
-
-    const interval = setInterval(() => {
-      fetchMatches()
-    }, 15000)
-
-    return () => clearInterval(interval)
-
+    fetch(`https://api.cricapi.com/v1/matches?apikey=${API_KEY}&offset=0`)
+      .then(res => res.json())
+      .then(data => {
+        setMatches(data.data || [])
+      })
   }, [])
 
   return (
+    <div style={{padding:"40px"}}>
 
-    <main className="min-h-screen bg-black text-white p-8">
-
-      <h1 className="text-4xl font-bold mb-8">
+      <h1 style={{fontSize:"40px", marginBottom:"20px"}}>
         Live Cricket Center
       </h1>
 
-      {loading && (
-        <p>Loading live matches...</p>
-      )}
+      {/* TABS */}
+      <div style={{
+        display:"flex",
+        gap:"20px",
+        marginBottom:"30px",
+        fontSize:"18px",
+        cursor:"pointer"
+      }}>
+        <span onClick={()=>setTab("live")}>Live Matches</span>
+        <span onClick={()=>setTab("upcoming")}>Upcoming Matches</span>
+        <span onClick={()=>setTab("finished")}>Finished Matches</span>
+        <span onClick={()=>setTab("trending")}>Trending Matches</span>
+      </div>
 
-      {!loading && matches.length === 0 && (
-        <p>No live matches right now.</p>
-      )}
+      {/* MATCH GRID */}
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div style={{
+        display:"grid",
+        gridTemplateColumns:"repeat(auto-fit,minmax(350px,1fr))",
+        gap:"25px"
+      }}>
 
-        {matches.map((match, index) => (
+        {matches.map((match:any,index)=>{
 
-          <div
-            key={index}
-            className="card-stadium p-5 rounded-xl border border-red-500 shadow-lg"
-          >
+          if(tab==="live" && match.matchStarted===false) return null
+          if(tab==="upcoming" && match.matchStarted===true) return null
 
-            <h2 className="text-xl font-bold mb-2">
-              {match.name}
-            </h2>
+          return (
 
-            <p className="text-green-400 mb-2">
-              {match.status}
-            </p>
+            <div key={index}
+            style={{
+              border:"2px solid red",
+              padding:"20px",
+              borderRadius:"12px",
+              boxShadow:"0 0 15px rgba(255,0,0,0.6)"
+            }}>
 
-            <p className="text-gray-400 text-sm">
-              Match Type: {match.matchType}
-            </p>
+              <h3>{match.name}</h3>
 
-            <p className="text-gray-400 text-sm">
-              Venue: {match.venue}
-            </p>
+              <p style={{color:"#00ff88"}}>
+                {match.status}
+              </p>
 
-            <p className="text-gray-400 text-sm">
-              Date: {match.date}
-            </p>
+              <p>Match Type: {match.matchType}</p>
+              <p>Venue: {match.venue}</p>
+              <p>Date: {match.date}</p>
 
-          </div>
+            </div>
 
-        ))}
+          )
+
+        })}
 
       </div>
 
-    </main>
-
+    </div>
   )
-
 }
-
-
-
