@@ -2,7 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 /* Full black theme */
+=======
+/* FULL PURE BLACK THEME */
+>>>>>>> 65a7e97 (full black theme)
 :root {
   --background: #000000;
   --foreground: #ffffff;
@@ -11,10 +15,49 @@
 html, body {
   background-color: #000000;
   color: #ffffff;
+<<<<<<< HEAD
+=======
 }
 
+/* Force every section to be black */
+* {
+  background-color: transparent;
+>>>>>>> 65a7e97 (full black theme)
+}
+
+/* Card style */
 .card-stadium {
   background: #000000;
+<<<<<<< HEAD
   border: 2px solid #ff0000;
   box-shadow: 0 0 15px rgba(255,0,0,0.6);
 }
+=======
+  border: 2px solid #ff1a1a;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+/* Navbar */
+nav {
+  background: #000000 !important;
+}
+
+/* Advertisement container */
+.ad-container {
+  background: #000000 !important;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 4px;
+}
+>>>>>>> 65a7e97 (full black theme)
