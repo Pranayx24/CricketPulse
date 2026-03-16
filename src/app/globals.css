@@ -2,13 +2,52 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-  background: #000000;
-  color: #ffffff;
+/* Force full black theme everywhere */
+
+:root {
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
+html,
+body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Remove gray backgrounds globally */
+* {
+  background-color: transparent;
+}
+
+/* Navbar */
+nav {
+  background-color: #000000 !important;
+}
+
+/* Footer */
+footer {
+  background-color: #000000 !important;
+}
+
+/* Sections */
+section {
+  background-color: #000000 !important;
+}
+
+/* Cards (matches container) */
 .card-stadium {
   background: #000000;
   border: 2px solid red;
   box-shadow: 0 0 15px rgba(255,0,0,0.7);
+}
+
+/* Ads container */
+.ad-container {
+  background: #000000;
+}
+
+/* Links */
+a {
+  color: #ffffff;
 }
