@@ -32,11 +32,8 @@ export default function Home() {
 
     fetchMatches()
 
-    // refresh every 60 seconds
     const interval = setInterval(()=>{
-
       fetchMatches()
-
     },60000)
 
     return ()=>clearInterval(interval)
@@ -45,9 +42,13 @@ export default function Home() {
 
   return(
 
-    <div style={{padding:"40px"}}>
+    <div style={{padding:"40px",background:"#000",minHeight:"100vh"}}>
 
-      <h1 style={{fontSize:"40px",marginBottom:"30px"}}>
+      <h1 style={{
+        fontSize:"40px",
+        marginBottom:"30px",
+        color:"#ffffff"
+      }}>
         Live Cricket Center
       </h1>
 
@@ -74,32 +75,43 @@ export default function Home() {
         <div
         style={{
           border:"2px solid red",
-          padding:"20px",
-          borderRadius:"12px",
+          padding:"22px",
+          borderRadius:"14px",
           boxShadow:"0 0 15px rgba(255,0,0,0.6)",
-          cursor:"pointer"
+          cursor:"pointer",
+          background:"#000"
         }}
         >
 
-        <h3 style={{color:"white"}}>
+        <h2 style={{
+          color:"#ffffff",
+          marginBottom:"10px"
+        }}>
           {match.name}
-        </h3>
+        </h2>
 
-        <p style={{color:"#00ff88"}}>
+        <p style={{
+          color:"#00ff88",
+          fontWeight:"bold"
+        }}>
           {match.status}
         </p>
 
-        <p style={{color:"white"}}>
-          Match Type: {match.matchType}
+        <div style={{marginTop:"10px"}}>
+
+        <p style={{color:"#ccc"}}>
+          🏏 Type: {match.matchType}
         </p>
 
-        <p style={{color:"white"}}>
-          Venue: {match.venue}
+        <p style={{color:"#ccc"}}>
+          📍 Venue: {match.venue}
         </p>
 
-        <p style={{color:"white"}}>
-          Date: {match.date}
+        <p style={{color:"#ccc"}}>
+          📅 Date: {match.date}
         </p>
+
+        </div>
 
         </div>
 
