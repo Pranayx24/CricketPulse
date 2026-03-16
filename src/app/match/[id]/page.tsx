@@ -1,128 +1,141 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { useParams } from "next/navigation"
 
-export default function MatchPage({ params }: any) {
+export default function MatchDetails(){
 
-  const API_KEY = "2bb0be13-6bdd-421f-9786-41f590656393"
+const params = useParams()
+const matchId = params.id
 
-  const [match,setMatch] = useState<any>(null)
+const [match,setMatch] = useState<any>(null)
+const [loading,setLoading] = useState(true)
 
-  const fetchMatch = () => {
+const API_KEY = "2bb0be13-6bdd-421f-9786-41f590656393"
 
-    fetch(`https://api.cricapi.com/v1/match_scorecard?apikey=${API_KEY}&id=${params.id}`)
-    .then(res=>res.json())
-    .then(data=>{
-      setMatch(data.data)
-    })
+const fetchMatch = async () => {
 
-  }
+try{
 
-  useEffect(()=>{
+const res = await fetch(
+`https://api.cricapi.com/v1/match_info?apikey=${API_KEY}&id=${matchId}`
+)
 
-    fetchMatch()
+const data = await res.json()
 
-    const interval = setInterval(()=>{
-      fetchMatch()
-    },10000)
+setMatch(data.data)
+setLoading(false)
 
-    return ()=>clearInterval(interval)
+}catch(err){
 
-  },[])
+console.log("Error loading match")
 
+}
 
-  if(!match){
-    return(
-      <div style={{padding:"40px",color:"white"}}>
-        Loading match...
-      </div>
-    )
-  }
+}
 
-  return(
+useEffect(()=>{
 
-    <div style={{padding:"40px",color:"white"}}>
+fetchMatch()
 
-      {/* MATCH HEADER */}
+const interval = setInterval(()=>{
 
-      <div
-      style={{
-        border:"2px solid red",
-        padding:"25px",
-        borderRadius:"12px",
-        boxShadow:"0 0 20px rgba(255,0,0,0.6)",
-        marginBottom:"30px"
-      }}
-      >
+fetchMatch()
 
-        <h1>{match.name}</h1>
+},30000)
 
-        <p style={{color:"#00ff88"}}>
-          {match.status}
-        </p>
+return ()=>clearInterval(interval)
 
-      </div>
+},[])
 
+if(loading){
 
-      {/* LIVE SCORES */}
+return(
+<div style={{padding:"40px"}}>
+<p style={{color:"#00ff88"}}>Loading match...</p>
+</div>
+)
 
-      <div
-      style={{
-        display:"grid",
-        gridTemplateColumns:"1fr 1fr",
-        gap:"20px",
-        marginBottom:"30px"
-      }}
-      >
+}
 
-      {match.score?.map((team:any,index:number)=>(
+return(
 
-        <div
-        key={index}
-        style={{
-          border:"2px solid red",
-          padding:"20px",
-          borderRadius:"10px"
-        }}
-        >
+<div style={{padding:"40px"}}>
 
-        <h2>{team.inning}</h2>
+<h1 style={{fontSize:"35px"}}>
+{match.name}
+</h1>
 
-        <h3>
-          {team.r}/{team.w}
-        </h3>
+<p style={{color:"#00ff88",marginBottom:"20px"}}>
+{match.status}
+</p>
 
-        <p>
-          Overs: {team.o}
-        </p>
+<div
+style={{
+border:"2px solid red",
+padding:"25px",
+borderRadius:"12px",
+boxShadow:"0 0 15px rgba(255,0,0,0.6)"
+}}
+>
 
-        </div>
+<h2>Match Info</h2>
 
-      ))}
+<p>Type: {match.matchType}</p>
 
-      </div>
+<p>Venue: {match.venue}</p>
 
+<p>Date: {match.date}</p>
 
-      {/* MATCH INFO */}
+<p>Toss: {match.tossWinner}</p>
 
-      <div
-      style={{
-        border:"2px solid red",
-        padding:"25px",
-        borderRadius:"10px"
-      }}
-      >
+</div>
 
-      <h2>Match Information</h2>
+<br/>
 
-      <p><b>Match Type:</b> {match.matchType}</p>
-      <p><b>Venue:</b> {match.venue}</p>
-      <p><b>Date:</b> {match.date}</p>
+<div
+style={{
+border:"2px solid red",
+padding:"25px",
+borderRadius:"12px",
+boxShadow:"0 0 15px rgba(255,0,0,0.6)"
+}}
+>
 
-      </div>
+<h2>Teams</h2>
 
-    </div>
+<p>{match.teams?.[0]}</p>
+<p>{match.teams?.[1]}</p>
 
-  )
+</div>
+
+<br/>
+
+<div
+style={{
+border:"2px solid red",
+padding:"25px",
+borderRadius:"12px",
+boxShadow:"0 0 15px rgba(255,0,0,0.6)"
+}}
+>
+
+<h2>Score</h2>
+
+{match.score?.map((s:any,index:number)=>(
+<div key={index}>
+
+<p>
+{s.inning} : {s.r}/{s.w} ({s.o} overs)
+</p>
+
+</div>
+))}
+
+</div>
+
+</div>
+
+)
 
 }
