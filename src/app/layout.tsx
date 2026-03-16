@@ -24,4 +24,8 @@ export default function RootLayout({
       </body>
     </html>
   )
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 7f91e33 (Full black background layout)
