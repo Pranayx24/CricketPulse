@@ -14,8 +14,12 @@
   }
 }
 
+html {
+  background-color: #000000;
+}
+
 body {
-  background-color: var(--background);
+  background-color: #000000 !important;
   color: var(--foreground);
 }
 
