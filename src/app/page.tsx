@@ -8,14 +8,28 @@ export default function Home() {
   const API_KEY = "2bb0be13-6bdd-421f-9786-41f590656393"
 
   const [matches,setMatches] = useState<any[]>([])
+  const [loading,setLoading] = useState(true)
 
-  useEffect(()=>{
+  const fetchMatches = () => {
 
     fetch(`https://api.cricapi.com/v1/matches?apikey=${API_KEY}&offset=0`)
     .then(res=>res.json())
     .then(data=>{
       setMatches(data.data || [])
+      setLoading(false)
     })
+
+  }
+
+  useEffect(()=>{
+
+    fetchMatches()
+
+    const interval = setInterval(()=>{
+      fetchMatches()
+    },20000)
+
+    return ()=>clearInterval(interval)
 
   },[])
 
@@ -26,6 +40,12 @@ export default function Home() {
       <h1 style={{fontSize:"40px",marginBottom:"30px"}}>
         Live Cricket Center
       </h1>
+
+      {loading && (
+        <p style={{color:"#00ff88"}}>
+          Loading live matches...
+        </p>
+      )}
 
       <div
       style={{
@@ -51,22 +71,24 @@ export default function Home() {
         }}
         >
 
-        <h3 style={{color:"white"}}>{match.name}</h3>
+        <h3 style={{color:"white"}}>
+          {match.name}
+        </h3>
 
         <p style={{color:"#00ff88"}}>
-        {match.status}
+          {match.status}
         </p>
 
         <p style={{color:"white"}}>
-        Match Type: {match.matchType}
+          Match Type: {match.matchType}
         </p>
 
         <p style={{color:"white"}}>
-        Venue: {match.venue}
+          Venue: {match.venue}
         </p>
 
         <p style={{color:"white"}}>
-        Date: {match.date}
+          Date: {match.date}
         </p>
 
         </div>
