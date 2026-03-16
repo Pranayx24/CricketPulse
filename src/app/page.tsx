@@ -5,8 +5,6 @@ import Link from "next/link"
 
 export default function Home() {
 
-  const API_KEY = "2bb0be13-6bdd-421f-9786-41f590656393"
-
   const [matches,setMatches] = useState<any[]>([])
   const [loading,setLoading] = useState(true)
 
@@ -14,9 +12,7 @@ export default function Home() {
 
     try{
 
-      const res = await fetch(
-        `const res = await fetch("/api/matches")`
-      )
+      const res = await fetch("/api/matches")
 
       const data = await res.json()
 
@@ -25,7 +21,8 @@ export default function Home() {
 
     }catch(err){
 
-      console.log("API error")
+      console.log("API error:",err)
+      setLoading(false)
 
     }
 
@@ -35,7 +32,7 @@ export default function Home() {
 
     fetchMatches()
 
-    // refresh every 60 seconds instead of 10 seconds
+    // refresh every 60 seconds
     const interval = setInterval(()=>{
 
       fetchMatches()
