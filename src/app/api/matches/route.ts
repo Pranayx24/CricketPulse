@@ -2,12 +2,19 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
 
-  const API_KEY = "2bb0be13-6bdd-421f-9786-41f590656393"
+  const API_KEY = "c891e91b67msh96cb4cbc6dd46d0p1348bdjsn123a3c78711e"
 
   try {
 
     const res = await fetch(
-      `https://api.cricapi.com/v1/matches?apikey=${API_KEY}`
+      "https://cricket-api-free-data.p.rapidapi.com/cricket-matches",
+      {
+        method: "GET",
+        headers: {
+          "X-RapidAPI-Key": API_KEY,
+          "X-RapidAPI-Host": "cricket-api-free-data.p.rapidapi.com"
+        }
+      }
     )
 
     const data = await res.json()
@@ -16,7 +23,12 @@ export async function GET() {
 
   } catch (error) {
 
-    return NextResponse.json({ error: "API failed" })
+    console.error("API ERROR:", error)
+
+    return NextResponse.json({
+      status: "error",
+      message: "Failed to fetch matches"
+    })
 
   }
 
