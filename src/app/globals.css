@@ -2,52 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
-<<<<<<< HEAD
-/* Full black theme */
-=======
-/* FULL PURE BLACK THEME */
->>>>>>> 65a7e97 (full black theme)
+/* FULL BLACK THEME */
+
 :root {
   --background: #000000;
   --foreground: #ffffff;
 }
 
-html, body {
+/* Make entire site black */
+html,
+body {
   background-color: #000000;
   color: #ffffff;
-<<<<<<< HEAD
-=======
+  min-height: 100vh;
 }
 
-/* Force every section to be black */
+/* Remove any grey backgrounds */
 * {
   background-color: transparent;
->>>>>>> 65a7e97 (full black theme)
 }
 
-/* Card style */
+/* Cards */
 .card-stadium {
   background: #000000;
-<<<<<<< HEAD
   border: 2px solid #ff0000;
-  box-shadow: 0 0 15px rgba(255,0,0,0.6);
-}
-=======
-  border: 2px solid #ff1a1a;
-  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  box-shadow: 0 0 18px rgba(255, 0, 0, 0.7);
+  border-radius: 12px;
+  transition: 0.3s ease;
 }
 
-/* Navbar */
-nav {
-  background: #000000 !important;
+.card-stadium:hover {
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.9);
 }
 
-/* Advertisement container */
-.ad-container {
-  background: #000000 !important;
+/* Navbar or sections */
+header,
+nav,
+section,
+main,
+footer {
+  background: #000000;
 }
 
 /* Scrollbar */
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -57,7 +55,10 @@ nav {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #444;
+  background: #330000;
   border-radius: 4px;
 }
->>>>>>> 65a7e97 (full black theme)
+
+::-webkit-scrollbar-thumb:hover {
+  background: #660000;
+}
