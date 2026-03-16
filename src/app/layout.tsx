@@ -17,15 +17,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} bg-black text-white min-h-screen flex flex-col`}
-      >
+      <body className={`${inter.className} bg-black text-white min-h-screen flex flex-col`}>
         {children}
       </body>
     </html>
   )
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> bf47086 (Fix layout template string)
