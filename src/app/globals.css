@@ -2,13 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+<<<<<<< HEAD
 /* FORCE FULL BLACK THEME */
 
+=======
+
+/* Force full black theme everywhere */
+=======
+/* FORCE FULL BLACK THEME */
+>>>>>>> 38e026c (force black theme)
+
+>>>>>>> c7a5f1f6a947cf20036d0eaa835add8e2b56ddcd
 html, body {
   background: #000000 !important;
   color: #ffffff !important;
 }
 
+<<<<<<< HEAD
 /* All sections black */
 
 header,
@@ -35,9 +45,86 @@ a {
   color: #ffffff;
 }
 
+=======
+
+html,
+body {
+  background-color: #000000 !important;
+  color: #ffffff !important;
+}
+
+/* Remove gray backgrounds globally */
+* {
+  background-color: transparent;
+}
+
+/* Navbar */
+nav {
+  background-color: #000000 !important;
+}
+
+/* Footer */
+footer {
+  background-color: #000000 !important;
+}
+
+/* Sections */
+section {
+  background-color: #000000 !important;
+}
+
+/* Cards (matches container) */
+.card-stadium {
+  background: #000000;
+  border: 2px solid red;
+  box-shadow: 0 0 15px rgba(255,0,0,0.7);
+}
+
+/* Ads container */
+.ad-container {
+  background: #000000;
+}
+
+/* Links */
+a {
+  color: #ffffff;
+}
+=======
+/* All sections black */
+
+header,
+nav,
+main,
+section,
+footer,
+div {
+  background-color: #000000 !important;
+}
+
+/* Cards */
+
+.card-stadium {
+  background: #000000 !important;
+  border: 2px solid #ff0000;
+  box-shadow: 0 0 18px rgba(255,0,0,0.7);
+  border-radius: 12px;
+}
+
+/* Links */
+
+a {
+  color: #ffffff;
+}
+
+>>>>>>> c7a5f1f6a947cf20036d0eaa835add8e2b56ddcd
 /* Footer */
 
 footer {
   background: #000000 !important;
   border-top: 1px solid #111;
+<<<<<<< HEAD
 }
+=======
+}
+
+>>>>>>> c7a5f1f6a947cf20036d0eaa835add8e2b56ddcd
