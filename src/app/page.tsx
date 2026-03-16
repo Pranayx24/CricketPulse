@@ -15,7 +15,7 @@ export default function Home() {
     try{
 
       const res = await fetch(
-        `https://api.cricapi.com/v1/matches?apikey=${API_KEY}&offset=0`
+        `const res = await fetch("/api/matches")`
       )
 
       const data = await res.json()
