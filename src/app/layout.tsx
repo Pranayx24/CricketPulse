@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'CricketPulse Live - Real-time Cricket Scores',
-  description: 'Fast, live cricket scores, latest updates, and match stats.',
+  description: 'Fast live cricket scores, latest updates, and match stats.',
   manifest: '/manifest.json',
 }
 
@@ -24,8 +24,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> 7f91e33 (Full black background layout)
